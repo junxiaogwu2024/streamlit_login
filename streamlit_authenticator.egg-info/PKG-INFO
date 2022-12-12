@@ -1,3 +1,20 @@
+Metadata-Version: 2.1
+Name: streamlit-authenticator
+Version: 0.2.1
+Summary: A secure authentication module to validate user credentials in a Streamlit application.
+Home-page: https://github.com/mkhorasani/Streamlit-Authenticator
+Author: Mohammad Khorasani
+Author-email: khorasani.mohammad@gmail.com
+License: UNKNOWN
+Keywords: Python,Streamlit,Authentication,Components
+Platform: UNKNOWN
+Classifier: Programming Language :: Python :: 3
+Classifier: License :: OSI Approved :: MIT License
+Classifier: Operating System :: OS Independent
+Requires-Python: >=3.6
+Description-Content-Type: text/markdown
+License-File: LICENSE
+
 # Streamlit-Authenticator [![Downloads](https://pepy.tech/badge/streamlit-authenticator)](https://pepy.tech/project/streamlit-authenticator) 
 <!--- [!["Buy Me A Coffee"](https://www.buymeacoffee.com/assets/img/custom_images/orange_img.png)](https://www.buymeacoffee.com/khorasani) --->
 **A secure authentication module to validate user credentials in a Streamlit application.**
@@ -207,3 +224,5 @@ with open('../config.yaml', 'w') as file:
 
 ## Credits
 - Mohamed Abdou for the highly versatile cookie manager in [Extra-Streamlit-Components](https://github.com/Mohamed-512/Extra-Streamlit-Components).
+
+
