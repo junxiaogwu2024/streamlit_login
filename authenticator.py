@@ -30,12 +30,12 @@ name, authentication_status, username = authenticator.login('Login', 'main')
 
 currenttime=format(datetime.now())
 logintime=datetime.strftime(datetime.utcnow(),"%H:%M:%S")
-logging.info(f"{hostname}," + f"{ip_address}," + logintime + ',' + str(authentication_status) + ',' + username)
+logging.info("TRACE:" + f"{hostname}," + f"{ip_address}," + logintime + ',' + str(authentication_status) + ',' + username)
 
 if st.session_state["authentication_status"]:
     if (logintime > officehour_end or logintime < officehour_start):
         error_msg="ERROR_TIME"
-        logging.info('ERROR: login outside of office hours - 9:00-12:00')
+        logging.info('Login outside of office hours - 9:00-12:00')
         st.error('You cannot login outside of office hours - 9:00-12:00')
         logging.info("ERROR:" + f"{hostname}," + f"{ip_address}," + logintime + ',' + error_msg + ',' + username)
         exit()
@@ -46,7 +46,7 @@ if st.session_state["authentication_status"]:
 elif st.session_state["authentication_status"] == False:
     st.error('Username/password is incorrect')
     error_msg="ERROR_CREDENTIAL"
-    logging.info('ERROR: user/password incorrect')
+    logging.info('User/password incorrect')
     logging.info('ERROR:' + f"{hostname}," + f"{ip_address}," + logintime + ',' + error_msg + ',' + username)
 elif st.session_state["authentication_status"] == None:
     st.warning('Please enter your username and password during working hours: M-F 9:00-12:00EST')
