@@ -25,4 +25,23 @@ Setup Steps:
     
     rbriggs/456
   
-8. You can find the output logs in the info.log file
+8. You can find the output logs in the info.log file with the following information
+
+ERROR: hostname, ip-address, timestamp(hh:mm:ss), Error_Code, username
+
+2022-12-13 01:07:53.007 info mode start
+2022-12-13 01:07:53.697 ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:07:53,False,asdad
+2022-12-13 01:07:53.698 ERROR: user/password incorrect
+2022-12-13 01:07:53.698 ERROR:ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:07:53,ERROR_CREDENTIAL,asdad
+2022-12-13 01:08:02.740 info mode start
+2022-12-13 01:08:03.432 ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:08:03,False,junsad
+2022-12-13 01:08:03.432 ERROR: user/password incorrect
+2022-12-13 01:08:03.433 ERROR:ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:08:03,ERROR_CREDENTIAL,junsad
+2022-12-13 01:08:10.334 info mode start
+2022-12-13 01:08:11.025 ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:08:11,False,jubsda
+2022-12-13 01:08:11.026 ERROR: user/password incorrect
+2022-12-13 01:08:11.026 ERROR:ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:08:11,ERROR_CREDENTIAL,jubsda
+2022-12-13 01:09:30.747 info mode start
+2022-12-13 01:09:31.784 ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:09:31,True,jsmith
+2022-12-13 01:09:31.784 ERROR: login outside of office hours - 9:00-12:00
+2022-12-13 01:09:31.785 ERROR:ip-10-0-46-173.ap-northeast-1.compute.internal,10.0.46.173,01:09:31,ERROR_TIME,jsmith
