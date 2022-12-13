@@ -3,20 +3,15 @@ import streamlit_authenticator as stauth
 import yaml
 import logging
 from datetime import datetime
+import socket
 
+hostname = socket.gethostname()
+ip_address = socket.gethostbyname(hostname)
 officehour_start="09:00:00"
 officehour_end="12:00:00"
+error_msg=""
 
-logging.basicConfig(filename='authenticator.log')
-logging.info('info mode')
-currenttime=format(datetime.now())
-logging.info('Logging time is: ' + currenttime)
-
-logintime=datetime.strftime(datetime.utcnow(),"%H:%M:%S")
-
-if (logintime > officehour_end or logintime < officehour_start):
-    logging.info('ERROR: login outside of office hours - 9:00-12:00')
-    st.error('You cannot login outside of office hours - 9:00-12:00')
+logging.info('info mode start')
 
 hashed_passwords = stauth.Hasher(['123', '456']).generate()
 
@@ -33,23 +28,26 @@ authenticator = stauth.Authenticate(
 
 name, authentication_status, username = authenticator.login('Login', 'main')
 
-if authentication_status:
-    authenticator.logout('Logout', 'main')
-    st.write(f'Welcome *{name}*')
-    st.title('Some content')
-elif authentication_status == False:
-    st.error('Username/password is incorrect')
-    logging.info(authentication_status)
-elif authentication_status == None:
-    st.warning('Please enter your username and password during working hours: M-F 9:00-12:00EST')
+currenttime=format(datetime.now())
+logintime=datetime.strftime(datetime.utcnow(),"%H:%M:%S")
+logging.info(f"{hostname}," + f"{ip_address}," + logintime + ',' + str(authentication_status) + ',' + username)
 
 if st.session_state["authentication_status"]:
-    authenticator.logout('Logout', 'main')
-    st.write(f'Welcome *{st.session_state["name"]}*')
-    st.title('Some content')
+    if (logintime > officehour_end or logintime < officehour_start):
+        error_msg="ERROR_TIME"
+        logging.info('ERROR: login outside of office hours - 9:00-12:00')
+        st.error('You cannot login outside of office hours - 9:00-12:00')
+        logging.info("ERROR:" + f"{hostname}," + f"{ip_address}," + logintime + ',' + error_msg + ',' + username)
+        exit()
+    elif (logintime <= officehour_end or logintime >= officehour_start):
+        authenticator.logout('Logout', 'main')
+        st.write(f'Welcome *{st.session_state["name"]}*')
+        st.title('SEAS8414 Login Dashboard in Splunk')
 elif st.session_state["authentication_status"] == False:
     st.error('Username/password is incorrect')
+    error_msg="ERROR_CREDENTIAL"
     logging.info('ERROR: user/password incorrect')
+    logging.info('ERROR:' + f"{hostname}," + f"{ip_address}," + logintime + ',' + error_msg + ',' + username)
 elif st.session_state["authentication_status"] == None:
     st.warning('Please enter your username and password during working hours: M-F 9:00-12:00EST')
 
@@ -95,3 +93,6 @@ if authentication_status:
 
 with open('../config.yaml', 'w') as file:
     yaml.dump(config, file, default_flow_style=False)
+
+
+
